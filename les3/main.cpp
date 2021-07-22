@@ -71,7 +71,7 @@ int main()
         sscanf(coordinates.c_str(), "%c%i", &letter, &digit);
         i = digit - 1;
         j = to_digit(letter);
-        if(j == -1 or i >= SIZE or i < 0)
+        if (j == -1 or i >= SIZE or i < 0)
         {
             std::cout << "Incorrect start postion, try one more time." << std::endl;
             condition = true;
@@ -117,7 +117,7 @@ int power_plus(int a, int b)
 {
     if (b == 0)
     {
-        return a;
+        return 1;
     }
 
     if(b % 2 == 0)
