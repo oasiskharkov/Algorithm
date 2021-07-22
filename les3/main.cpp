@@ -11,7 +11,7 @@ void print_binary_form(int val);
 int power(int a, int b);
 int power_plus(int a, int b);
 int to_digit(char letter);
-void count_king_moves(int i, int j, int& counter);
+int count_king_moves(int i, int j);
 
 static int field[SIZE][SIZE] = {
     {1, 0, 1, 0, 0, 1, 1, 0},
@@ -71,7 +71,7 @@ int main()
         sscanf(coordinates.c_str(), "%c%i", &letter, &digit);
         i = digit - 1;
         j = to_digit(letter);
-        if(j == -11 or i >= SIZE or i < 0)
+        if (j == -1 or i >= SIZE or i < 0)
         {
             std::cout << "Incorrect start postion, try one more time." << std::endl;
             condition = true;
@@ -87,9 +87,7 @@ int main()
         }
     } while(condition);
 
-    int counter = -1;
-    count_king_moves(i, j, counter) ;
-    std::cout << "The number of king moves is: " << counter << std::endl;
+    std::cout << "The number of king moves is: " << count_king_moves(i, j) << std::endl;
 
     return 0;
 }
@@ -119,7 +117,7 @@ int power_plus(int a, int b)
 {
     if (b == 0)
     {
-        return a;
+        return 1;
     }
 
     if(b % 2 == 0)
@@ -132,24 +130,27 @@ int power_plus(int a, int b)
     }
 }
 
-void count_king_moves(int i, int j, int& counter)
+int count_king_moves(int i, int j)
 {
+    static int counter = -1;
     if(i >= SIZE or i < 0 or j >= SIZE or j < 0 or field[i][j] == 1)
     {
-        return;
+        return 0;
     }
 
     counter++;
     field[i][j] = 1;
 
-    count_king_moves(i - 1, j - 1, counter);
-    count_king_moves(i - 1, j, counter);
-    count_king_moves(i - 1, j + 1, counter);
-    count_king_moves(i, j - 1, counter);
-    count_king_moves(i, j + 1, counter);
-    count_king_moves(i + 1, j - 1, counter);
-    count_king_moves(i + 1, j, counter);
-    count_king_moves(i + 1, j + 1, counter);
+    count_king_moves(i - 1, j - 1);
+    count_king_moves(i - 1, j);
+    count_king_moves(i - 1, j + 1);
+    count_king_moves(i, j - 1);
+    count_king_moves(i, j + 1);
+    count_king_moves(i + 1, j - 1);
+    count_king_moves(i + 1, j);
+    count_king_moves(i + 1, j + 1);
+
+    return counter;
 }
 
 int to_digit(char letter)
