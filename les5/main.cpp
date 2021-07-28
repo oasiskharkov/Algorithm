@@ -65,7 +65,7 @@ void improved_quick_sort(T* arr, int first, int last)
         {
             std::swap(arr[first], arr[middle]);
         }
-        else if(arr[last] < arr[middle])
+        else if (arr[last] < arr[middle])
         {
             std::swap(arr[last], arr[middle]);
         }
@@ -86,8 +86,8 @@ void improved_quick_sort(T* arr, int first, int last)
             }
 
         } while (i <= j);
-        if(i < last) improved_quick_sort(arr, i, last);
-        if(j > first) improved_quick_sort(arr, first, j);
+        if (i < last) improved_quick_sort(arr, i, last);
+        if (j > first) improved_quick_sort(arr, first, j);
     }
 }
 
@@ -111,7 +111,6 @@ void block_sort(int* arr, int size)
             buckets[d][counter] = arr[i];
             counter++;
             buckets[d][max] = counter;
-
         }
         int idx = 0;
         for(int i = 0; i < b; ++i)
@@ -126,6 +125,47 @@ void block_sort(int* arr, int size)
 }
 
 void block_sort_even(int* arr, int size)
+{
+    const int max = size;
+    const int b = 10;
+
+    int buckets[b][max + 1];
+    for(int i = 0; i < b; ++i)
+    {
+        buckets[i][max] = 0;
+    }
+
+    for(int digit = 1; digit < 1'000'000'000; digit *= 10)
+    {
+        for(int i = 0; i < max; ++i)
+        {
+            if (arr[i] % 2 == 0)
+            {
+                int d = (arr[i] / digit) % 10;
+                int counter = buckets[d][max];
+                buckets[d][counter] = arr[i];
+                counter++;
+                buckets[d][max] = counter;
+                arr[i] = -1;
+            }
+
+
+        }
+        int idx = 0;
+        for(int i = 0; i < b; ++i)
+        {
+            for(int j = 0; j < buckets[i][max]; ++j)
+            {
+                while(arr[idx] != -1) idx++;
+
+                arr[idx] = buckets[i][j];
+            }
+            buckets[i][max] = 0;
+        }
+    }
+}
+
+/*void block_sort_even(int* arr, int size)
 {
     int* p = new int[size];
     int counter = 0;
@@ -148,7 +188,7 @@ void block_sort_even(int* arr, int size)
         }
     }
     delete [] p;
-}
+}*/
 
 int main()
 {
@@ -168,6 +208,7 @@ int main()
     fill_random_array(arr1.get(), SIZE);
     print_array(arr1.get(), SIZE);
     block_sort_even(arr1.get(), SIZE);
+    //block_sort(arr1.get(), SIZE);
     print_array(arr1.get(), SIZE);
 
     return 0;
