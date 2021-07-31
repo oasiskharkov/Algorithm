@@ -23,11 +23,11 @@ private:
 
 template<typename T, int Size>
 PriorityQueue<T,Size>::PriorityQueue() :
+    arr {new T[Size]},
     counter {0},
     head {-1},
     tail {-1}
 {
-    arr = new T[Size];
 }
 
 template<typename T, int Size>
