@@ -1,7 +1,6 @@
 #include "stack_array.h"
 #include "priority_queue.h"
 
-using namespace std;
 constexpr int size = 100;
 
 int main()
