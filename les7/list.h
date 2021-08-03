@@ -5,25 +5,28 @@
 template <typename T>
 class List
 {
-public:
-    List();
-    ~List();
-    void insert(const T& value);
-    void clear();
-    int size() const;
-    const T& front() const;
-    const T& back() const;
-    bool isEmpty() const;
-    bool isSorted() const;
-    List<T> copy() const;
-    void print() const;
-    void reverse();
 private:
     struct Element
     {
         T elem;
         Element* next;
     };
+public:
+    List();
+    ~List();
+    void insert_back(const T& value);
+    void insert_front(const T& value);
+    Element* remove(const T& value);
+    void clear();
+    int size() const;
+    const T& front() const;
+    const T& back() const;
+    bool is_empty() const;
+    bool is_sorted() const;
+    List<T> copy() const;
+    void print() const;
+    void reverse();
+private:
     Element* head;
     Element* tail;
     int counter;
@@ -56,10 +59,11 @@ void List<T>::clear()
     }
     tail = nullptr;
     head = nullptr;
+    counter = 0;
 }
 
 template<typename T>
-void List<T>::insert(const T& value)
+void List<T>::insert_back(const T& value)
 {
     Element* ins = new Element;
     ins->elem = value;
@@ -79,14 +83,81 @@ void List<T>::insert(const T& value)
 }
 
 template<typename T>
+void List<T>::insert_front(const T& value)
+{
+    Element* ins = new Element;
+    ins->elem = value;
+    ins->next = nullptr;
+
+    if(head == nullptr)
+    {
+        head = ins;
+        tail = ins;
+    }
+    else
+    {
+        head->next = ins;
+        head = ins;
+    }
+    counter++;
+}
+
+template<typename T>
+typename List<T>::Element* List<T>::remove(const T& value)
+{
+    Element* prev = nullptr;
+    Element* current = tail;
+    while(current)
+    {
+        if(current->elem == value)
+        {
+            if(current == tail)
+            {
+                if (head == tail)
+                {
+                    head = tail = nullptr;
+                }
+                else
+                {
+                    tail = current->next;
+                }
+            }
+            else if (current == head)
+            {
+                head = prev;
+                head->next = nullptr;
+            }
+            else
+            {
+                prev->next = current->next;
+            }
+            delete current;
+            counter--;
+            return prev;
+        }
+        prev = current;
+        current = current->next;
+    }
+    return nullptr;
+}
+
+template<typename T>
 const T& List<T>::front() const
 {
+    if(is_empty())
+    {
+        throw std::logic_error("List is empty.");
+    }
     return head->elem;
 }
 
 template<typename T>
 const T& List<T>::back() const
 {
+    if(is_empty())
+    {
+        throw std::logic_error("List is empty.");
+    }
     return tail->elem;
 }
 
@@ -97,14 +168,19 @@ int List<T>::size() const
 }
 
 template<typename T>
-bool List<T>::isEmpty() const
+bool List<T>::is_empty() const
 {
     return counter == 0;
 }
 
 template<typename T>
-bool List<T>::isSorted() const
+bool List<T>::is_sorted() const
 {
+    if(is_empty())
+    {
+        throw std::logic_error("List is empty.");
+    }
+
     Element* temp = tail;
     while(temp && temp->next)
     {
@@ -120,11 +196,16 @@ bool List<T>::isSorted() const
 template<typename T>
 List<T> List<T>::copy() const
 {
+    if(is_empty())
+    {
+        throw std::logic_error("List is empty.");
+    }
+
     List<T> copy;
     Element* temp = tail;
     while(temp)
     {
-        copy.insert(temp->elem);
+        copy.insert_back(temp->elem);
         temp = temp->next;
     }
     copy.reverse();
@@ -152,6 +233,12 @@ void List<T>::reverse()
 template<typename T>
 void List<T>::print() const
 {
+    if(is_empty())
+    {
+        std::cout << "List is empty." << std::endl;
+        return;
+    }
+
     Element* temp = tail;
     while(temp)
     {
