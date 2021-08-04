@@ -3,50 +3,34 @@
 #include <string>
 #include <vector>
 
+constexpr int size = 3;
+
 bool check_statement(const std::string& statement)
 {
     Stack<char> stack;
+    std::pair<char, char> braces[size] = {{'[', ']'}, {'(', ')'}, {'{', '}'}};
     for(const auto& ch : statement)
     {
-        if(ch == '[' or ch == '{' or ch == '(')
+        for(int i = 0; i < size; ++i)
         {
-            stack.push(ch);
-        }
-        else if(ch == ')')
-        {
-            if( !stack.isEmpty() and stack.peek() == '(')
+            if(ch == braces[i].first)
             {
-                stack.pop();
+                stack.push(ch);
             }
-            else
+            else if(ch == braces[i].second)
             {
-                return false;
-            }
-        }
-        else if(ch == ']')
-        {
-            if( !stack.isEmpty() and stack.peek() == '[')
-            {
-                stack.pop();
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else if(ch == '}')
-        {
-            if( !stack.isEmpty() and stack.peek() == '{')
-            {
-                stack.pop();
-            }
-            else
-            {
-                return false;
+                if(!stack.is_empty() and stack.peek() == braces[i].first)
+                {
+                    stack.pop();
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }
-    return stack.isEmpty();
+    return stack.is_empty();
 }
 
 int main()

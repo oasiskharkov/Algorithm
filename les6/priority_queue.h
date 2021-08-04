@@ -10,10 +10,10 @@ public:
   ~PriorityQueue();
   void insert(const T& value);
   void remove();
-  bool isEmpty() const;
+  bool is_empty() const;
   const T& front() const;
 private:
-  int getTopIndex() const;
+  int get_top_index() const;
 private:
   T* arr;
   int counter;
@@ -37,7 +37,7 @@ PriorityQueue<T,Size>::~PriorityQueue()
 }
 
 template<typename T, int Size>
-bool PriorityQueue<T,Size>::isEmpty() const
+bool PriorityQueue<T,Size>::is_empty() const
 {
     return counter == 0;
 }
@@ -51,7 +51,7 @@ void PriorityQueue<T,Size>::insert(const T& value)
         return;
     }
 
-    if(isEmpty())
+    if(is_empty())
     {
         tail = head = 0;
         arr[tail] = value;
@@ -68,9 +68,9 @@ void PriorityQueue<T,Size>::insert(const T& value)
 }
 
 template<typename T, int Size>
-int PriorityQueue<T,Size>::getTopIndex() const
+int PriorityQueue<T,Size>::get_top_index() const
 {
-    if(isEmpty())
+    if(is_empty())
     {
         return -1;
     }
@@ -92,13 +92,13 @@ int PriorityQueue<T,Size>::getTopIndex() const
 template<typename T, int Size>
 void PriorityQueue<T,Size>::remove()
 {
-    if(isEmpty())
+    if(is_empty())
     {
         std::cout << "Priority queue is empty." << std::endl;
         return;
     }
 
-    int index = getTopIndex();
+    int index = get_top_index();
 
     if(index == tail)
     {
@@ -138,12 +138,12 @@ void PriorityQueue<T,Size>::remove()
 template<typename T, int Size>
 const T& PriorityQueue<T,Size>::front() const
 {
-    if(isEmpty())
+    if(is_empty())
     {
         throw std::logic_error("Priority queue is empty.");
     }
 
-    int index = getTopIndex();
+    int index = get_top_index();
     return arr[index];
 }
 

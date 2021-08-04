@@ -205,10 +205,9 @@ List<T> List<T>::copy() const
     Element* temp = tail;
     while(temp)
     {
-        copy.insert_back(temp->elem);
+        copy.insert_front(temp->elem);
         temp = temp->next;
     }
-    copy.reverse();
     return copy;
 }
 

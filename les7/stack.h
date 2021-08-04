@@ -13,7 +13,7 @@ public:
     void pop();
     void clear();
     const T& peek() const;
-    bool isEmpty() const;
+    bool is_empty() const;
 private:
     struct Element
     {
@@ -55,7 +55,7 @@ void Stack<T>::push(const T& value)
 }
 
 template<typename T>
-bool Stack<T>::isEmpty() const
+bool Stack<T>::is_empty() const
 {
     return head == nullptr;
 }
@@ -64,8 +64,9 @@ template<typename T>
 void Stack<T>::pop()
 {
     Element* temp = head;
-    if(isEmpty())
+    if(is_empty())
     {
+        std::cout << "Stack is empty." << std::endl;
         return;
     }
     head = head->next;
@@ -75,7 +76,7 @@ void Stack<T>::pop()
 template<typename T>
 const T& Stack<T>::peek() const
 {
-    if(!isEmpty())
+    if(!is_empty())
     {
         return head->elem;
     }

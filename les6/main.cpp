@@ -13,7 +13,7 @@ int main()
     pq.insert({2, 5});
     pq.insert({3, 8});
 
-    while(!pq.isEmpty())
+    while(!pq.is_empty())
     {
         std::cout << pq.front().second << ' ' << std::endl;
         pq.remove();
@@ -39,7 +39,7 @@ int main()
         }
     }
     std::cout << "Binary form: ";
-    while(!stackArray.isEmpty())
+    while(!stackArray.is_empty())
     {
         std::cout << stackArray.peek();
         stackArray.pop();

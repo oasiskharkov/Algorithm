@@ -10,7 +10,7 @@ public:
   ~StackArray();
   void pop();
   void push(const T& value);
-  bool isEmpty() const;
+  bool is_empty() const;
   const T& peek() const;
 private:
   T* arr;
@@ -30,7 +30,7 @@ StackArray<T, Size>::~StackArray()
 }
 
 template<typename T, int Size>
-bool StackArray<T, Size>::isEmpty() const
+bool StackArray<T, Size>::is_empty() const
 {
     return index < 0;
 }
@@ -51,7 +51,7 @@ void StackArray<T, Size>::push(const T& value)
 template<typename T, int Size>
 void StackArray<T, Size>::pop()
 {
-    if(!isEmpty())
+    if(!is_empty())
     {
         --index;
     }
@@ -64,7 +64,7 @@ void StackArray<T, Size>::pop()
 template<typename T, int Size>
 const T& StackArray<T, Size>::peek() const
 {
-    if(!isEmpty())
+    if(!is_empty())
     {
         return arr[index];
     }
