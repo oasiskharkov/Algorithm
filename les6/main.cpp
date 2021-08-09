@@ -3,28 +3,9 @@
 
 constexpr int size = 100;
 
-int main()
+void print_binary(int val)
 {
-    // ====== TASK #1 ======
-    PriorityQueue<std::pair<int,int>, size> pq;
-    pq.insert({6, 7});
-    pq.insert({1, 10});
-    pq.insert({4, 3});
-    pq.insert({2, 5});
-    pq.insert({3, 8});
-
-    while(!pq.is_empty())
-    {
-        std::cout << pq.front().second << ' ' << std::endl;
-        pq.remove();
-    }
-
-    // ====== TASK #2 ======
     StackArray<int, size> stackArray;
-
-    int val;
-    std::cout << "Input value: ";
-    std::cin >> val;
 
     if(!val)
     {
@@ -45,6 +26,31 @@ int main()
         stackArray.pop();
     }
     std::cout << std::endl;
+}
+
+int main()
+{
+    // ====== TASK #1 ======
+    PriorityQueue<std::pair<int,int>, size> pq;
+    pq.insert({6, 7});
+    pq.insert({1, 10});
+    pq.insert({4, 3});
+    pq.insert({2, 5});
+    pq.insert({3, 8});
+
+    while(!pq.is_empty())
+    {
+        std::cout << pq.front().second << ' ' << std::endl;
+        pq.remove();
+    }
+
+
+    // ====== TASK #2 ======
+    int val;
+    std::cout << "Input value: ";
+    std::cin >> val;
+    print_binary(val);
+
 
     return 0;
 }
