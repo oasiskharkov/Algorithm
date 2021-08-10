@@ -37,10 +37,12 @@ int main()
     tree.insert(10);
 
     tree.print_tree(tree.get_root());
-//    tree.remove(3);
-//    tree.remove(6);
-//    tree.remove(10);
-//    tree.print_tree(tree.get_root());
+    tree.remove(9);
+    tree.print_tree(tree.get_root());
+    tree.remove(6);
+    tree.print_tree(tree.get_root());
+    tree.remove(3);
+    tree.print_tree(tree.get_root());
 
     Tree<int>::Element* node2 = tree.search(tree.get_root(), 2);
     if(node2 and node2->elem == 2)

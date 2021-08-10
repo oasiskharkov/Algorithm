@@ -180,72 +180,90 @@ void Tree<T>::remove(const T& value)
         {
             root = nullptr;
         }
-        else if (is_left_child)
-        {
-            parent->left = nullptr;
-        }
         else
         {
-            parent->right = nullptr;
+            if (is_left_child)
+            {
+                parent->left = nullptr;
+            }
+            else
+            {
+                parent->right = nullptr;
+            }
         }
-        delete current;
     }
     else if (current->right == nullptr)
     {
-        if (is_left_child)
+        if (current == root)
         {
-            parent->left = current->left;
+            root = current->left;
         }
         else
         {
-            parent->right = current->left;
+            if (is_left_child)
+            {
+                parent->left = current->left;
+            }
+            else
+            {
+                parent->right = current->left;
+            }
         }
-        delete current;
     }
     else if (current->left == nullptr)
     {
-        if (is_left_child)
+        if (current == root)
         {
-            parent->left = current->right;
+            root = current->right;
         }
         else
         {
-            parent->right = current->right;
+            if (is_left_child)
+            {
+                parent->left = current->right;
+            }
+            else
+            {
+                parent->right = current->right;
+            }
         }
-        delete current;
     }
     else
     {
         Element* successor = get_successor(current);
         if (current == root)
         {
-            root = successor;
-        }
-        else if (is_left_child)
-        {
-            parent->left = successor;
+            root = current->right;
         }
         else
         {
-            parent->right = successor;
+            if (is_left_child)
+            {
+                parent->left = successor;
+            }
+            else
+            {
+                parent->right = successor;
+            }
         }
         successor->left = current->left;
-
     }
+    delete current;
+    current = nullptr;
 }
 
 template <typename T>
 typename Tree<T>::Element* Tree<T>::get_successor(Element* node) {
     Element* current = node->right;
     Element* parent = node;
-    Element* s = node;
+    Element* temp = node;
 
     while (current != nullptr) {
-        parent = s;
-        s = current;
+        parent = temp;
+        temp = current;
         current = current->left;
     }
-    return s;
+    return temp;
 }
 
 template <typename T>
