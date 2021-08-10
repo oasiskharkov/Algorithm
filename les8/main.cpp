@@ -36,12 +36,16 @@ int main()
     tree.insert(1);
     tree.insert(10);
 
+    std::cout << tree.size() << std::endl;
     tree.print_tree(tree.get_root());
     tree.remove(9);
+    std::cout << tree.size() << std::endl;
     tree.print_tree(tree.get_root());
     tree.remove(6);
+    std::cout << tree.size() << std::endl;
     tree.print_tree(tree.get_root());
     tree.remove(3);
+    std::cout << tree.size() << std::endl;
     tree.print_tree(tree.get_root());
 
     Tree<int>::Element* node2 = tree.search(tree.get_root(), 2);

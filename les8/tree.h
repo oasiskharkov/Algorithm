@@ -250,6 +250,7 @@ void Tree<T>::remove(const T& value)
     }
     delete current;
     current = nullptr;
+    counter--;
 }
 
 template <typename T>
