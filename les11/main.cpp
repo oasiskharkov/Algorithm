@@ -30,7 +30,7 @@ int main()
     std::string text2;
     std::cout << "Input text: ";
     std::getline(std::cin, text2);
-    int cols =  text2.length() / rows + 1;
+    int cols =  (text2.length() - 1) / rows + 1;
     std::string encrypted_text2 = permutation_encrypt(text2, cols);
     std::cout << "Encrypted text: " << encrypted_text2 << std::endl;
     std::string decrypted_text2 = permutation_decrypt(encrypted_text2, cols);
