@@ -3,11 +3,11 @@
 
 constexpr int rows = 4;
 
-std::string ceasar_encrypt(std::string normal_text, int key);
-std::string ceasar_decrypt(std::string cipher_text, int key);
+std::string ceasar_encrypt(const std::string& normal_text, int key);
+std::string ceasar_decrypt(const std::string& cipher_text, int key);
 
-std::string permutation_encrypt(std::string normal_text, int cols);
-std::string permutation_decrypt(std::string cipher_text, int cols);
+std::string permutation_encrypt(const std::string& normal_text, int cols);
+std::string permutation_decrypt(const std::string &cipher_text, int cols);
 
 int main()
 {
@@ -39,7 +39,7 @@ int main()
     return 0;
 }
 
-std::string ceasar_encrypt(std::string normal_text, int key)
+std::string ceasar_encrypt(const std::string& normal_text, int key)
 {
     std::string cipher_text = "";
     for(const auto& ch : normal_text)
@@ -49,7 +49,7 @@ std::string ceasar_encrypt(std::string normal_text, int key)
     return cipher_text;
 }
 
-std::string ceasar_decrypt(std::string cipher_text, int key)
+std::string ceasar_decrypt(const std::string& cipher_text, int key)
 {
     std::string text = "";
     for(const auto& ch : cipher_text)
@@ -59,7 +59,7 @@ std::string ceasar_decrypt(std::string cipher_text, int key)
     return text;
 }
 
-std::string permutation_encrypt(std::string normal_text, int cols)
+std::string permutation_encrypt(const std::string& normal_text, int cols)
 {
     char** mx = new char*[rows];
     for(int i = 0; i < rows; ++i)
@@ -105,7 +105,7 @@ std::string permutation_encrypt(std::string normal_text, int cols)
     return  cipher_text;
 }
 
-std::string permutation_decrypt(std::string cipher_text, int cols)
+std::string permutation_decrypt(const std::string& cipher_text, int cols)
 {
     char** mx = new char*[rows];
     for(int i = 0; i < rows; ++i)
