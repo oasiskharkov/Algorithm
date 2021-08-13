@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 void print_coins_count(int price);
 int hash_function(const char* str);
 
